@@ -1,0 +1,111 @@
+<div class="modal-header">
+    <h4 class="modal-title">Edit User</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <p *ngIf="alert.message">
+        <ngb-alert [type]="alert.type" >{{ alert.message }}</ngb-alert>
+    </p>
+    <form [formGroup]="userFormGroup" (ngSubmit)="userFormGroup.valid && saveUser()">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                        placeholder="Enter First Name">
+                    <small id="emailHelp" *ngIf="isRequired('firstName')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                        placeholder="Enter Last Name">
+                      
+                    <small id="emailHelp" *ngIf="isRequired('lastName')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="text" class="form-control" id="age" formControlName="age" placeholder="Enter Age">
+                    <small id="ageHelp" *ngIf="isRequired('age')" class="form-text text-danger">Required Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <!-- <input type="text" class="form-control" id="gender" formControlName="gender"
+                        placeholder="Enter Gender"> -->
+                        <select class="form-control" id="gender" formControlName="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>                    
+                    <small id="emailHelp" *ngIf="isRequired('gender')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email"
+                        placeholder="Enter Email">
+                    <small id="emailHelp" *ngIf="isRequired('email')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" formControlName="phone"
+                        placeholder="Enter Phone">
+                    <small id="emailHelp" *ngIf="isRequired('phone')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+            </div>
+            <div class="col-6" formGroupName="company">
+                <div class="form-group">
+                    <label for="name">Comapny Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name"
+                        placeholder="Enter Comapny Name">
+                    <small id="emailHelp" *ngIf="isRequired('company.name')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group" >
+                    <label for="title">Comapny Title Name</label>
+                    <input type="text" class="form-control" id="title" formControlName="title"
+                        placeholder="Enter Comapny Title">
+                    <small id="emailHelp" *ngIf="isRequired('company.title')" class="form-text text-danger">Required
+                        Fields</small>
+                </div>
+                <div class="form-group">
+                    <label for="department">Comapny Department</label>
+                    <input type="text" class="form-control" id="department" formControlName="department"
+                        placeholder="Enter Department">
+                    <small id="emailHelp" *ngIf="isRequired('company.department')"
+                        class="form-text text-danger">Required Fields</small>
+                </div>
+                <div formGroupName="address">
+                    <div class="form-group" >
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" formControlName="city"
+                            placeholder="Enter city">
+                        <small id="emailHelp" *ngIf="isRequired('company.address.city')"
+                            class="form-text text-danger">Required Fields</small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" id="state" formControlName="state"
+                            placeholder="Enter State">
+                        <small id="emailHelp" *ngIf="isRequired('company.address.state')"
+                            class="form-text text-danger">Required Fields</small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" class="form-control" id="postalCode" formControlName="postalCode"
+                            placeholder="Enter postalCode">
+                        <small id="emailHelp" *ngIf="isRequired('company.address.postalCode')"
+                            class="form-text text-danger">Required Fields</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="userFormGroup.invalid"
+        (click)="userFormGroup.valid && saveUser()">Submit</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Close click')">Close</button>
+</div>

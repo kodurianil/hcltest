@@ -1,0 +1,44 @@
+<section>
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">HCL Test</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex" role="search" [formGroup]="pageForm">
+                    <input class="form-control me-2" type="text" formControlName="search" placeholder="Search" aria-label="Search">
+                    <!-- <button class="me-1 btn btn-outline-success" type="submit">Search</button> -->
+                    <img *ngIf="searchLoading" src="./assets/images/arrow-clockwise.svg" id="loader">
+                    <button class="btn btn-outline-warning" type="button" (click)="pageForm.get('search')?.setValue('')">Clear</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <p *ngIf="alert.message">
+        <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+    </p>
+    <ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-alpine" [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef" [rowData]="users" [frameworkComponents]="frameworkComponents"
+        (gridReady)="onGridReady($event)"></ag-grid-angular>
+
+    <nav aria-label="Page navigation example" *ngIf="!pageForm.get('search')?.value">
+        <ul class="pagination">
+            <li class="page-item" [ngClass]="{disabled: hidePrev}"><span class="page-link"
+                    (click)="onPrevious()">Previous</span></li>
+            <li class="page-item disabled"><span class="page-link"> {{pageForm.get('currentPage')?.value}} of
+                    {{pageForm.get('totalPages')?.value}} </span></li>
+            <li class="page-item" [ngClass]="{disabled: hideNext}"><span class="page-link"
+                    (click)="onNext()">Next</span></li>
+            <li class="page-item disabled"><a class="page-link">&nbsp;&nbsp;&nbsp;Page Limit&nbsp;&nbsp;&nbsp;</a></li>
+            <li class="page-item" [ngClass]="{disabled: limit == 5}" (click)="changelimit(5)"><span
+                    class="page-link">5</span></li>
+            <li class="page-item" [ngClass]="{disabled: limit == 10}" (click)="changelimit(10)"><span
+                    class="page-link">10</span></li>
+            <li class="page-item" [ngClass]="{disabled: limit == 25}" (click)="changelimit(25)"><span
+                    class="page-link">25</span></li>
+        </ul>
+    </nav>
+</section>
